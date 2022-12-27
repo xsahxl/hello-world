@@ -10,12 +10,12 @@ steps:
       name: Tony
   - run: echo 'Hi ${{ task.id }}'
     id: task
-  - run: echo '根据前一步骤的执行状态，判断是否执行当前步骤'
+  - run: echo '根据前一步骤的执行状态，决定是否执行当前步骤'
     if: ${{ steps.task.status === 'success' }}
   - run: echo 'Hi ${{ secrets.ACCOUNTID }}'
   - run: echo 'Hi ${{ git.event_name }}'
   - run: echo '这是一个push事件'
-    if: ${{ git.event_name == 'push' }}
+    if: ${{ git.event_name === 'push' }}
   - run: echo '这是一个pull_request事件'
-    if: ${{ git.event_name == 'pull_request' }}
+    if: ${{ git.event_name === 'pull_request' }}
   - run: echo 'suceess end'
