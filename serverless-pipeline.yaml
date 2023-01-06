@@ -10,15 +10,3 @@ steps:
       name: Tony
   - run: echo 'Hi ${{ task.id }}'
     id: task
-  - run: echo '根据前一步骤的执行状态，决定是否执行当前步骤'
-    if: ${{ steps.task.status === 'success' }}
-  - run: echo 'Hi ${{ secrets.ACCOUNTID }}'
-  - run: echo 'Hi ${{ git.event_name }}'
-  - run: echo '这是一个push事件'
-    if: ${{ git.event_name === 'push' }}
-  - run: echo '这是一个pull_request事件'
-    if: ${{ git.event_name === 'pull_request' }}
-  - run: npm run error
-  - run: echo '如果前面的步骤失败了，这一步不会执行'
-  - run: echo '如果前面的步骤失败了，可以通过内置函数 failure() 来继续执行'
-    if: ${{ failure() }}
